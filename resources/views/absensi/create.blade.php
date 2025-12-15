@@ -24,6 +24,19 @@
                     </div>
                     @endif
 
+                    <div class="mb-6">
+                        <a href="{{ route('absensi.index') }}"
+                            class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                                </path>
+                            </svg>
+                            {{ __('Lihat Daftar Absensi yang Sudah Disimpan') }}
+                        </a>
+                    </div>
+
                     {{-- Form ini akan diarahkan ke AbsensiController@tampilAbsensi --}}
                     <form method="POST" action="{{ route('absensi.tampil') }}"
                         class="mb-8 p-4 border rounded-lg bg-gray-50">

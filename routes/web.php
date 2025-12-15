@@ -14,3 +14,6 @@ Route::resource('siswa', SiswaController::class)->except(['show']);
 Route::get('absensi', [AbsensiController::class, 'create'])->name('absensi.create');
 Route::post('absensi/tampil', [AbsensiController::class, 'tampilAbsensi'])->name('absensi.tampil');
 Route::post('absensi', [AbsensiController::class, 'store'])->name('absensi.store');
+
+Route::get('absensi/daftar', [AbsensiController::class, 'index'])->name('absensi.index');
+Route::get('absensi/detail/{tanggal}/{kelas_id}', [AbsensiController::class, 'showAbsensi'])->name('absensi.show');

@@ -13,6 +13,46 @@ class AbsensiController extends Controller
     /**
      * Menampilkan form pemilihan kelas dan tanggal (sekaligus menampilkan tabel siswa jika sudah dipilih).
      */
+    public function index()
+    {
+        // Mencari semua kombinasi unik dari tanggal dan kelas_id yang sudah ada absensinya.
+        $riwayatAbsensi = Absensi::select('tanggal')
+            ->selectRaw('COUNT(DISTINCT siswa_id) as jumlah_siswa_diabsen')
+            ->join('siswas', 'absensis.siswa_id', '=', 'siswas.id')
+            ->selectRaw('kelas_id')
+            ->groupBy('tanggal', 'kelas_id')
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
+        // Ambil data Kelas untuk mapping nama kelas
+        $kelas = Kelas::all()->keyBy('id');
+
+        return view('absensi.index', compact('riwayatAbsensi', 'kelas'));
+    }
+
+    /**
+     * Menampilkan detail absensi untuk tanggal dan kelas tertentu.
+     */
+    public function showAbsensi($tanggal, $kelas_id)
+    {
+        $namaKelas = Kelas::findOrFail($kelas_id)->nama_kelas;
+
+        // Ambil semua absensi untuk kelas dan tanggal yang spesifik
+        $detailAbsensi = Absensi::where('tanggal', $tanggal)
+            ->whereHas('siswa', function ($query) use ($kelas_id) {
+                $query->where('kelas_id', $kelas_id);
+            })
+            ->with('siswa')
+            ->orderBy(Siswa::select('nama_siswa')->whereColumn('siswas.id', 'absensis.siswa_id'))
+            ->get();
+
+        if ($detailAbsensi->isEmpty()) {
+            return redirect()->route('absensi.index')->with('error', 'Data absensi tidak ditemukan.');
+        }
+
+        return view('absensi.show', compact('detailAbsensi', 'tanggal', 'namaKelas'));
+    }
+
     public function create()
     {
         $kelas = Kelas::orderBy('nama_kelas')->get();

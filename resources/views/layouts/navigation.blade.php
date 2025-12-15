@@ -5,8 +5,10 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <a class="flex align-middle items-center gap-3" href="{{ route('dashboard') }}">
+                        <img class="w-10 h-10" src="{{ asset('img/logo_smk1.png') }}" alt="">
+                        <h1 class="font-bold text-2xl">SMK 1 Kamal</h1>
+                        {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
                     </a>
                 </div>
 

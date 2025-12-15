@@ -10,7 +10,10 @@ class Siswa extends Model
     use HasFactory;
 
     protected $fillable = [
-        // ... (fillable Siswa lainnya)
+        'nisn',
+        'nama_siswa',
+        'jenis_kelamin',
+        'kelas_id'
     ];
 
     // Relasi belongsTo ke Kelas

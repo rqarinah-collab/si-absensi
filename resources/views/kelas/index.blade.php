@@ -25,9 +25,9 @@
                     @endif
 
                     <div class="flex justify-end mb-4">
-                        <x-primary-button href="{{ route('kelas.create') }}">
+                        <x-primary-a href="{{ route('kelas.create') }}">
                             {{ __('Tambah Kelas') }}
-                        </x-primary-button>
+                        </x-primary-a>
                     </div>
 
                     <div class="overflow-x-auto">
